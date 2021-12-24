@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Blog.Data;
+using Blog.Models;
 
 namespace efcore_overview
 {
@@ -6,7 +9,11 @@ namespace efcore_overview
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using var context = new BlogDataContext();
+
+            var tag = new Tag { Name = "ASP.NET", Slug = "ASP.NET" };
+            context.Tags.Add(tag);
+            context.SaveChanges();
         }
     }
 }
