@@ -1,6 +1,6 @@
 namespace Blog.Models
 {
-    public class PostTags
+    public class PostTag
     {
         public int PostId { get; set; }
         public int TagId { get; set; }
