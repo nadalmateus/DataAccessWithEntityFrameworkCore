@@ -11,36 +11,49 @@ namespace Blog
         static void Main(string[] args)
         {
             using var context = new BlogDataContext();
-            {
-                //CREATE
-                // var tag = new Tag { Name = ".NET", Slug = "dotnet" };
-                // context.Tags.Add(tag);
-                // context.SaveChanges();
+            // var user = new User
+            // {
+            //     Name = "Mateus Nadal",
+            //     Slug = "mateusnadal",
+            //     Email = "mateus@nadal.com",
+            //     Bio = "Software Engineer",
+            //     Image = "http://localhost/image",
+            //     PasswordHash = "1231231231231243"
+            // };
 
-                // UPDATE
-                // var tag = context.Tags.FirstOrDefault(x => x.Id == 4);
-                // tag.Name = "ASP.NET";
-                // tag.Slug = "EF Core";
-                // context.Update(tag);
-                // context.SaveChanges();
+            // var category = new Category
+            // {
+            //     Name = "Back-end",
+            //     Slug = "backend"
+            // };
 
-                //DELETE
-                // var tag = context.Tags.FirstOrDefault(x => x.Id == 3);
-                // context.Tags.Remove(tag);
-                // context.SaveChanges();
+            // var post = new Post()
+            // {
+            //     Author = user,
+            //     Category = category,
+            //     Body = "Hello Word!",
+            //     Slug = "ef-core",
+            //     Summary = "Learn EF Core",
+            //     Title = "EF Core",
+            //     CreateDate = DateTime.Now,
+            //     LastUpdateDate = DateTime.Now
+            // };
 
-                // //GET
-                // var tags = context.Tags.AsNoTracking().Where(x => x.Name.Contains(".NET")).ToList();
+            // context.Posts.Add(post);
+            // context.SaveChanges();
 
-                // foreach (var tag in tags)
-                // {
-                //     Console.Write(tag.Name);
-                // }
+            // var posts = context.Posts.AsNoTracking().Include(x => x.Author).Include(x => x.Category).OrderBy(x => x.LastUpdateDate).ToList();
 
-                var tag = context.Tags.AsNoTracking().FirstOrDefault(x => x.Id == 1);
-                Console.WriteLine(tag?.Name);
+            // foreach (var post in posts)
+            // {
+            //     Console.WriteLine($"{post.Title} escrito por {post.Author?.Name} em {post.Category?.Name}");
+            // }
 
-            }
+            var post = context.Posts.Include(x => x.Author).Include(x => x.Category).OrderByDescending(x => x.LastUpdateDate).FirstOrDefault();
+            post.Author.Name = "Mateus Nadal";
+
+            context.Posts.Update(post);
+            context.SaveChanges();
         }
     }
 }
