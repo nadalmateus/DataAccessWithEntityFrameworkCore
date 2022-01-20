@@ -18,7 +18,7 @@ namespace Blog.Data.Mappings
 
             builder.Property(x => x.LastUpdateDate).IsRequired().HasColumnName("LastUpdateDate")
                 .HasColumnType("SMALLDATETIME")
-                .HasMaxLength(60).HasDefaultValueSql("GETDATE()")
+                .HasMaxLength(60)
                 .HasDefaultValue(DateTime.Now.ToUniversalTime());
 
             builder.HasIndex(x => x.Slug, "IX_Post_Slug").IsUnique();
@@ -30,18 +30,18 @@ namespace Blog.Data.Mappings
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(x => x.Tags).WithMany(x => x.Posts).UsingEntity<Dictionary<string, object>>(
-                    "PostTag",
-                    post => post.HasOne<Tag>()
+                "PostTag",
+                post => post.HasOne<Tag>()
                     .WithMany()
                     .HasForeignKey("PostId")
                     .HasConstraintName("FK_PostTag_PostId")
                     .OnDelete(DeleteBehavior.Cascade),
-                    tag => tag.HasOne<Post>()
+                tag => tag.HasOne<Post>()
                     .WithMany()
                     .HasForeignKey("TagId")
                     .HasConstraintName("FK_PostTag_TagId")
                     .OnDelete(DeleteBehavior.Cascade)
-                );
+            );
         }
     }
 }
