@@ -20,6 +20,7 @@ namespace Blog.Data.Mappings
             builder.Property(x => x.PasswordHash);
             builder.HasIndex(x => x.Slug, "IX_Category_Slug").IsUnique();
             builder.HasIndex(x => x.Slug, "IX_User_Slug").IsUnique();
+            builder.Property(x => x.GitHub);
 
 
             builder.HasMany(x => x.Roles)
