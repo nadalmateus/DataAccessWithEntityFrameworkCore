@@ -1,4 +1,4 @@
-namespace Blog.Model;
+namespace Blog.Models;
 public class PostTag
 {
     public int PostId { get; set; }

@@ -1,4 +1,4 @@
-namespace Blog.Model;
+namespace Blog.Models;
 public class UserRole
 {
     public int UserId { get; set; }
